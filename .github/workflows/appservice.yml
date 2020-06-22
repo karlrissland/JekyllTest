@@ -31,6 +31,16 @@ jobs:
         run: jekyll build
         working-directory: ./docs
         
+      - name: Zip Release
+        uses: TheDoctor0/zip-release@v0.3.0
+        with:
+          # Filename for archive
+          filename: release.zip
+          # Base path for archive files
+          path: .
+          # Working directory before zipping
+          directory: ./docs/_site/
+
       - name: azure login
         uses: azure/login@v1
         with:
@@ -44,7 +54,7 @@ jobs:
           # Enter an existing Slot other than the Production slot
           slot-name: staging
           # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-          package: ./docs/_site/.
+          package: ./release.zip
       
       - name: azure logout
         run: az logout
