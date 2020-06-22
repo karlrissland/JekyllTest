@@ -55,7 +55,7 @@ jobs:
           # Enter an existing Slot other than the Production slot
           slot-name: staging
           # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-          package: ./release
+          package: ./docs/_site
       
       - name: azure logout
         run: az logout
