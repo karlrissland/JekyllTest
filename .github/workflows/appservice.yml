@@ -22,12 +22,32 @@ jobs:
         uses: ruby/setup-ruby@ec106b438a1ff6ff109590de34ddc62c540232e0
         with: 
           ruby-version: 2.6
+          
       - name: Install dependencies
         run: bundle install
         working-directory: ./docs
+        
       - name: Jekyll build
         run: jekyll build
         working-directory: ./docs
+        
+      - name: azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          # Name of the Azure Web App
+          app-name: DocsDemoAppService
+          # Enter an existing Slot other than the Production slot
+          slot-name: docsdemoappservice-staging
+          # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
+          package: ./docs/_site/.
+      
+      - name: azure logout
+        run: az logout
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
