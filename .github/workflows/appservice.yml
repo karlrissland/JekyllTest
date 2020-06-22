@@ -31,9 +31,11 @@ jobs:
         run: jekyll build
         working-directory: ./docs
         
+      - name: create release dir
+        run: mkdir release
+        
       - name: Create Zip File
-      - run: mkdir release
-      - uses: montudor/action-zip@v0.1.0
+        uses: montudor/action-zip@v0.1.0
         with:
           args: zip release/release.zip -r docs/_site
 
