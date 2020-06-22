@@ -29,8 +29,10 @@ jobs:
         working-directory: ./docs
       - name: Install dependencies
         run: bundle install
+        working-directory: ./docs
       - name: Jekyll build
         run: jekyll build
+        working-directory: ./docs
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v0.0.1-preview
