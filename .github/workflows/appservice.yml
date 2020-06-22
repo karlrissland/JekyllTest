@@ -33,7 +33,6 @@ jobs:
         
       - name: Create Zip File
       - uses: montudor/action-zip@v0.1.0
-      - run: mkdir release
       - with:
           args: zip release/release.zip -r docs/_site
 
