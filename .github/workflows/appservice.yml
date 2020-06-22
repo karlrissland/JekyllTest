@@ -31,15 +31,11 @@ jobs:
         run: jekyll build
         working-directory: ./docs
         
-      - name: Zip Release
-        uses: TheDoctor0/zip-release@v0.3.0
-        with:
-          # Filename for archive
-          filename: release.zip
-          # Base path for archive files
-          path: ./release
-          # Working directory before zipping
-          directory: ./docs/_site/
+      - name: Create Zip File
+      - uses: montudor/action-zip@v0.1.0
+      - run: mkdir release
+      - with:
+          args: zip release/release.zip -r docs/_site
 
       - name: list files
         run: ls -R
