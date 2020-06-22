@@ -41,6 +41,9 @@ jobs:
           # Working directory before zipping
           directory: ./docs/_site/
 
+      - name: list files
+        run: ls -R
+        
       - name: azure login
         uses: azure/login@v1
         with:
@@ -54,7 +57,7 @@ jobs:
           # Enter an existing Slot other than the Production slot
           slot-name: staging
           # Applies to Web App only: Path to package or folder. *.zip, *.war, *.jar or a folder to deploy
-          package: ./release.zip
+          package: release.zip
       
       - name: azure logout
         run: az logout
